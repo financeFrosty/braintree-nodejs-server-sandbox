@@ -12,9 +12,9 @@ const { send } = require("express/lib/response");
 const gateway = new braintree.BraintreeGateway({
     environment: braintree.Environment.Sandbox,
     // Get those values from your account
-    merchantId: "",
-    publicKey: "",
-    privateKey: ""
+    merchantId: "42zxxx27mz43797m",
+    publicKey: "krqw6mt7rqhc5wsq",
+    privateKey: "fc25cc44bc739d8c9a0476e7db323b67"
 });
 
 app.use(express.json());

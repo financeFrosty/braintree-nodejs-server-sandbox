@@ -15,7 +15,7 @@
 
     <script type="text/javascript">
         const form = document.getElementById("payment-form");
-        console.log("requesting token");
+        console.log("requesting token...");
         fetch("http://localhost:3000/token")
             .then(response => response.json())
             .then(data => {
