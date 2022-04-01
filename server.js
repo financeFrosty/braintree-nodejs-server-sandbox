@@ -1,4 +1,8 @@
-
+// create .env file
+// sandbox.braintreegateway.com
+// merchantId=""
+// publicKey=""
+// privateKey=""
 
 const braintree = require("braintree");
 
@@ -9,12 +13,13 @@ const port = 3000
 const cors = require('cors');
 const { send } = require("express/lib/response");
 
+require('dotenv').config();
+
 const gateway = new braintree.BraintreeGateway({
     environment: braintree.Environment.Sandbox,
-    // Get those values from your account
-    merchantId: "42zxxx27mz43797m",
-    publicKey: "krqw6mt7rqhc5wsq",
-    privateKey: "fc25cc44bc739d8c9a0476e7db323b67"
+    merchantId: process.env.merchantId,
+    publicKey: process.env.publicKey,
+    privateKey: process.env.privateKey
 });
 
 app.use(express.json());
@@ -24,6 +29,7 @@ app.use(cors());
 app.get('/token', (req, res) => {
     console.log('sending token');
     gateway.clientToken.generate({}, (err, response) => {
+        if(err) console.log(err);
         res.send({ token: response.clientToken });
     });
 })
@@ -40,10 +46,9 @@ app.post("/nonce", (req, res) => {
         }
     }, (err, result) => {
         if(err){
-            send(err);
+            res.send(err);
         }
-        console.log(result);
-        res.send("Success");
+        res.send(result);
     })
 })
 

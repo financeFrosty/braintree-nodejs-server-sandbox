@@ -30,7 +30,7 @@
                         dropinInstance.requestPaymentMethod((error, payload) => {
                             if(error) console.error(error);
                             document.getElementById("nonce").value = payload.nonce;
-                            console.log("submitting form with nonce");
+                            console.log(`submitting form with nonce`);
                             form.submit();
                         })
                     })
